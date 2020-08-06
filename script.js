@@ -44,7 +44,6 @@ const getCars = async () => {
 
 const loadData = async () => {
     if (i > 5) return;
-    console.log(i);
     let table = $(".table");
     table.append(createLoader());
     let carsDivs = await getCars();
@@ -59,16 +58,6 @@ $(document).ready(async (event) => {
     loadData();
 });
 
-const debouncedScroll = _.debounce(async (event) => {
-    console.log("I'm fired");
-    let table = $('.table');
-    let tableHeight = table.height();
-    if (tableHeight - 1000 <= window.scrollY && !isLoading) {
-        isLoading = true;
-        loadData();
-    }
-}, 330);
-
 const notDebouncedScroll = async (event) => {
     console.log("I'm fired");
     let table = $('.table');
@@ -78,5 +67,7 @@ const notDebouncedScroll = async (event) => {
         loadData();
     }
 }
+
+const debouncedScroll = _.debounce(notDebouncedScroll, 330);
 
 $(window).scroll(debouncedScroll);
