@@ -43,7 +43,7 @@ const getCars = async () => {
 }
 
 const loadData = async () => {
-    if (i > 5) return;
+    if (i > 15) return;
     let table = $(".table");
     table.append(createLoader());
     let carsDivs = await getCars();
